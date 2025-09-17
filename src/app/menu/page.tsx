@@ -23,7 +23,7 @@ const menuCategories = [
         name: "Veggie Supreme",
         desc: "Bell peppers, onions, mushrooms, black olives, and extra cheese",
         price: 399,
-        img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&w=400",
+        img: "https://images.unsplash.com/photo-1590947132387-155cc02f3212?ixlib=rb-4.0.3&w=400",
       },
       {
         id: "veg3",
@@ -68,7 +68,7 @@ const menuCategories = [
         name: "Coca Cola",
         desc: "Chilled Coca Cola 330ml can",
         price: 49,
-        img: "https://images.unsplash.com/photo-1592444645479-6b1ed4b3df39?ixlib=rb-4.0.3&w=400",
+        img: "https://images.unsplash.com/photo-1581636625402-29b2a704ef13?ixlib=rb-4.0.3&w=400",
       },
       {
         id: "bev2",
