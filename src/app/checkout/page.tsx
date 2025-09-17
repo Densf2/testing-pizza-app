@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Metadata } from 'next';
+import { useState } from "react";
+import { Metadata } from "next";
 
 function PageTitle({ children }: { children: React.ReactNode }) {
   return (
@@ -23,44 +23,44 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 
 export default function CheckoutPage() {
   const [addressForm, setAddressForm] = useState({
-    buildingNumber: '',
-    streetName: '',
-    city: '',
-    state: '',
-    country: 'India',
-    pinCode: ''
+    buildingNumber: "",
+    streetName: "",
+    city: "",
+    state: "",
+    country: "India",
+    pinCode: "",
   });
-  
-  const [paymentMethod, setPaymentMethod] = useState('');
+
+  const [paymentMethod, setPaymentMethod] = useState("");
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [loading, setLoading] = useState(false);
 
   // Sample order data
   const orderItems = [
     { name: "Margherita Classic", quantity: 2, itemPrice: 299, price: 598 },
-    { name: "Pepperoni Supreme", quantity: 1, itemPrice: 549, price: 549 }
+    { name: "Pepperoni Supreme", quantity: 1, itemPrice: 549, price: 549 },
   ];
-  
+
   const subtotal = 1147;
   const gst = Math.round(subtotal * 0.18);
   const total = subtotal + gst;
 
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setAddressForm(prev => ({
+    setAddressForm((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handlePlaceOrder = () => {
     if (!addressForm.buildingNumber || !addressForm.city || !paymentMethod) {
-      alert('Please fill in all required fields');
+      alert("Please fill in all required fields");
       return;
     }
 
     setLoading(true);
-    
+
     // Simulate order placement
     setTimeout(() => {
       setOrderPlaced(true);
@@ -80,8 +80,10 @@ export default function CheckoutPage() {
           <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
             <h3 className="text-lg font-semibold mb-4">Order Details</h3>
             <p className="text-gray-600 mb-2">Order ID: #PZ{Date.now()}</p>
-            <p className="text-gray-600 mb-2">Total: ₹{total}</p>
-            <p className="text-gray-600 mb-4">Estimated delivery: 25-30 minutes</p>
+            <p className="text-gray-600 mb-2">Total: {total}grn</p>
+            <p className="text-gray-600 mb-4">
+              Estimated delivery: 25-30 minutes
+            </p>
             <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
               Track your order via SMS updates
             </div>
@@ -95,14 +97,14 @@ export default function CheckoutPage() {
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
         <PageTitle>Checkout</PageTitle>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Checkout Form */}
           <div className="lg:col-span-2 space-y-8">
             {/* Delivery Address */}
             <div className="bg-white rounded-lg shadow-lg p-6">
               <SectionTitle>Delivery Address</SectionTitle>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -118,7 +120,7 @@ export default function CheckoutPage() {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Street Name
@@ -132,7 +134,7 @@ export default function CheckoutPage() {
                     placeholder="Enter street name"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     City *
@@ -147,7 +149,7 @@ export default function CheckoutPage() {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     State
@@ -161,7 +163,7 @@ export default function CheckoutPage() {
                     placeholder="Enter state"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     PIN Code
@@ -175,7 +177,7 @@ export default function CheckoutPage() {
                     placeholder="Enter PIN code"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Country
@@ -191,24 +193,24 @@ export default function CheckoutPage() {
                 </div>
               </div>
             </div>
-            
+
             {/* Payment Method */}
             <div className="bg-white rounded-lg shadow-lg p-6">
               <SectionTitle>Payment Method</SectionTitle>
-              
+
               <div className="space-y-3">
                 <label className="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
                   <input
                     type="radio"
                     name="payment"
                     value="cod"
-                    checked={paymentMethod === 'cod'}
+                    checked={paymentMethod === "cod"}
                     onChange={(e) => setPaymentMethod(e.target.value)}
                     className="mr-3"
                   />
                   <span className="text-gray-700">Cash on Delivery</span>
                 </label>
-                
+
                 <label className="flex items-center p-3 border border-gray-300 rounded-lg opacity-50 cursor-not-allowed">
                   <input
                     type="radio"
@@ -219,7 +221,7 @@ export default function CheckoutPage() {
                   />
                   <span className="text-gray-500">Wallet (Coming Soon)</span>
                 </label>
-                
+
                 <label className="flex items-center p-3 border border-gray-300 rounded-lg opacity-50 cursor-not-allowed">
                   <input
                     type="radio"
@@ -228,9 +230,11 @@ export default function CheckoutPage() {
                     disabled
                     className="mr-3"
                   />
-                  <span className="text-gray-500">Credit/Debit Card (Coming Soon)</span>
+                  <span className="text-gray-500">
+                    Credit/Debit Card (Coming Soon)
+                  </span>
                 </label>
-                
+
                 <label className="flex items-center p-3 border border-gray-300 rounded-lg opacity-50 cursor-not-allowed">
                   <input
                     type="radio"
@@ -239,55 +243,65 @@ export default function CheckoutPage() {
                     disabled
                     className="mr-3"
                   />
-                  <span className="text-gray-500">Net Banking (Coming Soon)</span>
+                  <span className="text-gray-500">
+                    Net Banking (Coming Soon)
+                  </span>
                 </label>
               </div>
-              
+
               <button
                 onClick={handlePlaceOrder}
                 disabled={loading}
                 className="w-full mt-6 bg-orange-600 hover:bg-orange-700 disabled:bg-orange-400 text-white font-bold py-3 px-6 rounded-lg transition-colors"
               >
-                {loading ? 'Placing Order...' : 'Place Order'}
+                {loading ? "Placing Order..." : "Place Order"}
               </button>
             </div>
           </div>
-          
+
           {/* Order Summary */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-lg p-6 sticky top-8">
-              <h3 className="text-xl font-bold text-gray-800 mb-6">Order Summary</h3>
-              
+              <h3 className="text-xl font-bold text-gray-800 mb-6">
+                Order Summary
+              </h3>
+
               <div className="space-y-4 mb-6">
                 {orderItems.map((item, index) => (
-                  <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded">
+                  <div
+                    key={index}
+                    className="flex justify-between items-center p-3 bg-gray-50 rounded"
+                  >
                     <div>
                       <h4 className="font-semibold">{item.name}</h4>
-                      <p className="text-sm text-gray-600">₹{item.itemPrice} x {item.quantity}</p>
+                      <p className="text-sm text-gray-600">
+                        {item.itemPrice}grn x {item.quantity}
+                      </p>
                     </div>
-                    <span className="font-semibold">₹{item.price}</span>
+                    <span className="font-semibold">{item.price}grn</span>
                   </div>
                 ))}
               </div>
-              
+
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal:</span>
-                  <span className="font-semibold">₹{subtotal}</span>
+                  <span className="font-semibold">{subtotal}grn</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">GST (18%):</span>
-                  <span className="font-semibold">₹{gst}</span>
+                  <span className="font-semibold">{gst}grn</span>
                 </div>
                 <hr />
                 <div className="flex justify-between text-lg">
                   <span className="font-bold">Total:</span>
-                  <span className="font-bold text-orange-600">₹{total}</span>
+                  <span className="font-bold text-orange-600">{total}grn</span>
                 </div>
               </div>
-              
+
               <div className="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded text-sm">
-                <strong>Delivery Note:</strong> Your order will be delivered within 30 minutes of confirmation.
+                <strong>Delivery Note:</strong> Your order will be delivered
+                within 30 minutes of confirmation.
               </div>
             </div>
           </div>
