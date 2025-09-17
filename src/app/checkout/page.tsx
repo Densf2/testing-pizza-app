@@ -80,7 +80,7 @@ export default function CheckoutPage() {
           <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
             <h3 className="text-lg font-semibold mb-4">Order Details</h3>
             <p className="text-gray-600 mb-2">Order ID: #PZ{Date.now()}</p>
-            <p className="text-gray-600 mb-2">Total: {total}grn</p>
+            <p className="text-gray-600 mb-2">Total: {total}₴</p>
             <p className="text-gray-600 mb-4">
               Estimated delivery: 25-30 minutes
             </p>
@@ -275,10 +275,10 @@ export default function CheckoutPage() {
                     <div>
                       <h4 className="font-semibold">{item.name}</h4>
                       <p className="text-sm text-gray-600">
-                        {item.itemPrice}grn x {item.quantity}
+                        {item.itemPrice}₴ x {item.quantity}
                       </p>
                     </div>
-                    <span className="font-semibold">{item.price}grn</span>
+                    <span className="font-semibold">{item.price}₴</span>
                   </div>
                 ))}
               </div>
@@ -286,16 +286,16 @@ export default function CheckoutPage() {
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal:</span>
-                  <span className="font-semibold">{subtotal}grn</span>
+                  <span className="font-semibold">{subtotal}₴</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">GST (18%):</span>
-                  <span className="font-semibold">{gst}grn</span>
+                  <span className="font-semibold">{gst}₴</span>
                 </div>
                 <hr />
                 <div className="flex justify-between text-lg">
                   <span className="font-bold">Total:</span>
-                  <span className="font-bold text-orange-600">{total}grn</span>
+                  <span className="font-bold text-orange-600">{total}₴</span>
                 </div>
               </div>
 

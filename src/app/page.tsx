@@ -88,21 +88,21 @@ export default function Home() {
                 name: "Margherita Classic",
                 image:
                   "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-4.0.3&w=400",
-                price: "299grn",
+                price: "299₴",
                 description: "Fresh tomatoes, mozzarella, and basil",
               },
               {
                 name: "Pepperoni Supreme",
                 image:
                   "https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&w=400",
-                price: "449grn",
+                price: "449₴",
                 description: "Loaded with pepperoni and extra cheese",
               },
               {
                 name: "Veggie Delight",
                 image:
                   "https://images.unsplash.com/photo-1571066811602-716837d681de?ixlib=rb-4.0.3&w=400",
-                price: "399grn",
+                price: "399₴",
                 description: "Bell peppers, onions, mushrooms, and olives",
               },
             ].map((pizza, index) => (

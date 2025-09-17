@@ -114,7 +114,7 @@ function MenuItem({ item }: { item: any }) {
           <div className="flex justify-between items-start mb-2">
             <h3 className="text-xl font-bold text-gray-800">{item.name}</h3>
             <span className="text-2xl font-bold text-orange-600">
-              {item.price}grn
+              {item.price}₴
             </span>
           </div>
           <p className="text-gray-600 mb-4 text-sm leading-relaxed">
@@ -169,7 +169,7 @@ function Cart() {
         <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
           <div>
             <h4 className="font-semibold">Margherita Classic</h4>
-            <p className="text-sm text-gray-600">299grn x 1</p>
+            <p className="text-sm text-gray-600">299₴ x 1</p>
           </div>
           <div className="flex items-center space-x-2">
             <button className="text-red-500 hover:text-red-700">
@@ -183,7 +183,7 @@ function Cart() {
       
       <div className="border-t pt-4">
         <div className="flex justify-between items-center mb-4">
-          <span className="font-bold text-lg">Total: 299grn</span>
+          <span className="font-bold text-lg">Total: 299₴</span>
         </div>
         <button className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-lg font-semibold transition-colors mb-2">
           GO TO CART

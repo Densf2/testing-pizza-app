@@ -56,7 +56,7 @@ function CartItem({ item }: { item: any }) {
               <h3 className="text-xl font-bold text-gray-800">{item.name}</h3>
               <p className="text-gray-600 text-sm mb-2">{item.desc}</p>
               <p className="text-lg font-semibold text-gray-800">
-                Price: {item.price} grn
+                Price: {item.price} ₴
               </p>
             </div>
             <button className="text-red-500 hover:text-red-700 p-2">
@@ -86,9 +86,7 @@ function CartItem({ item }: { item: any }) {
               </div>
             </div>
             <div className="text-right">
-              <p className="text-xl font-bold text-orange-600">
-                {itemTotal}grn
-              </p>
+              <p className="text-xl font-bold text-orange-600">{itemTotal}₴</p>
             </div>
           </div>
         </div>
@@ -164,17 +162,17 @@ export default function CartPage() {
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal:</span>
-                  <span className="font-semibold">{subtotal}grn</span>
+                  <span className="font-semibold">{subtotal}₴</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">GST (18%):</span>
-                  <span className="font-semibold">{Math.round(gst)}grn</span>
+                  <span className="font-semibold">{Math.round(gst)}₴</span>
                 </div>
                 <hr />
                 <div className="flex justify-between text-lg">
                   <span className="font-bold">Total:</span>
                   <span className="font-bold text-orange-600">
-                    {Math.round(total)}grn
+                    {Math.round(total)}₴
                   </span>
                 </div>
               </div>

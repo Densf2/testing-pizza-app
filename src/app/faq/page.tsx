@@ -33,7 +33,7 @@ const faqData = [
   {
     question: "Do you have a minimum order value?",
     answer:
-      "Yes, we have a minimum order value of 200 grn for delivery. However, there's no minimum for pickup orders.",
+      "Yes, we have a minimum order value of 200 ₴ for delivery. However, there's no minimum for pickup orders.",
   },
   {
     question: "What if I'm not satisfied with my order?",
