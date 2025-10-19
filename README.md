@@ -14,20 +14,12 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-for drizzle needs settings for db seed and connection, for manual setting env variable \
-run the command: export DATABASE_URL="postgresql://pizza_user:pizza_pass@localhost:5432/pizza_db"
+For drizzle needs settings for db seed and connection, for manual setting env variable
+run the command: export DATABASE_URL="URL_GET_AFTER_COMMAND_DOCKER-COMPOSE"
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Data storage based on PostgreSQL, and opeares with drizzle. For usage DB without installing and configuring on local machine - use the docker. In the root of the project defined file docker-compose.yml. \
+For starting db instance run the command:
+`docker-compose up -d` \
+Stop the db with command:
+`docker-compose down` \
+If DB url after starting the db instance different the configured in the files - update the env. variable value with your url.
