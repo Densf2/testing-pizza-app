@@ -133,9 +133,24 @@ export const usersRelations = relations(users, ({ many }) => ({
   addresses: many(addresses),
 }));
 
+export const addressesRelations = relations(addresses, ({ one }) => ({
+  user: one(users, {
+    fields: [addresses.userId],
+    references: [users.id],
+  }),
+}));
+
 export const pizzasRelations = relations(pizzas, ({ many }) => ({
   sizes: many(pizzaSizes),
   orderItems: many(orderItems),
+}));
+
+// Add this missing relation!
+export const pizzaSizesRelations = relations(pizzaSizes, ({ one }) => ({
+  pizza: one(pizzas, {
+    fields: [pizzaSizes.pizzaId],
+    references: [pizzas.id],
+  }),
 }));
 
 export const ordersRelations = relations(orders, ({ one, many }) => ({
