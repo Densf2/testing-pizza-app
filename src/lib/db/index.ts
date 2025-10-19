@@ -7,8 +7,16 @@ if (!process.env.DATABASE_URL) {
 }
 
 // For query purposes
-const queryClient = postgres(process.env.DATABASE_URL);
-export const db = drizzle(queryClient, { schema });
+// Use globalThis to persist client/db across HMR reloads in dev
+const globalForDb = globalThis as unknown as { queryClient?: ReturnType<typeof postgres>, db?: ReturnType<typeof drizzle> };
 
+if (!globalForDb.queryClient) {
+  globalForDb.queryClient = postgres(process.env.DATABASE_URL);
+}
+if (!globalForDb.db) {
+  globalForDb.db = drizzle(globalForDb.queryClient, { schema });
+}
+
+export const db = globalForDb.db;
 // Export schema for use in queries
 export * from "./schema";
