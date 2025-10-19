@@ -17,7 +17,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 For drizzle needs settings for db seed and connection, for manual setting env variable
 run the command: export DATABASE_URL="URL_GET_AFTER_COMMAND_DOCKER-COMPOSE"
 
-Data storage based on PostgreSQL, and opeares with drizzle. For usage DB without installing and configuring on local machine - use the docker. In the root of the project defined file docker-compose.yml. \
+Data storage based on PostgreSQL, and opearates with drizzle. For usage DB without installing and configuring on local machine - use the docker. In the root of the project defined file docker-compose.yml. \
 For starting db instance run the command:
 `docker-compose up -d` \
 Stop the db with command:
