@@ -66,14 +66,20 @@ export const pizzas = pgTable("pizzas", {
 });
 
 // Pizza sizes pricing
-export const pizzaSizes = pgTable("pizza_sizes", {
-  id: serial("id").primaryKey(),
-  pizzaId: integer("pizza_id")
-    .references(() => pizzas.id)
-    .notNull(),
-  size: pizzaSizeEnum("size").notNull(),
-  price: decimal("price", { precision: 10, scale: 2 }).notNull(),
-});
+export const pizzaSizes = pgTable(
+  "pizza_sizes",
+  {
+    id: serial("id").primaryKey(),
+    pizzaId: integer("pizza_id")
+      .references(() => pizzas.id)
+      .notNull(),
+    size: pizzaSizeEnum("size").notNull(),
+    price: decimal("price", { precision: 10, scale: 2 }).notNull(),
+  },
+  (table) => ({
+    uniquePizzaSize: table.unique(["pizzaId", "size"]),
+  })
+);
 
 // Toppings table
 export const toppings = pgTable("toppings", {
