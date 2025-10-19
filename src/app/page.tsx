@@ -1,6 +1,21 @@
 import Link from "next/link";
+import { db, pizzas } from "@/lib/db";
+import { eq } from "drizzle-orm";
 
-export default function Home() {
+async function getFeaturedPizzas() {
+  const featuredPizzas = await db.query.pizzas.findMany({
+    where: eq(pizzas.isActive, true),
+    limit: 3,
+    with: {
+      sizes: true,
+    },
+  });
+  return featuredPizzas;
+}
+
+export default async function Home() {
+  const featuredPizzas = await getFeaturedPizzas();
+
   return (
     <div className="relative">
       {/* Hero Section */}
@@ -82,55 +97,35 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Sample Pizza Cards */}
-            {[
-              {
-                name: "Margherita Classic",
-                image:
-                  "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-4.0.3&w=400",
-                price: "299₴",
-                description: "Fresh tomatoes, mozzarella, and basil",
-              },
-              {
-                name: "Pepperoni Supreme",
-                image:
-                  "https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&w=400",
-                price: "449₴",
-                description: "Loaded with pepperoni and extra cheese",
-              },
-              {
-                name: "Veggie Delight",
-                image:
-                  "https://images.unsplash.com/photo-1571066811602-716837d681de?ixlib=rb-4.0.3&w=400",
-                price: "399₴",
-                description: "Bell peppers, onions, mushrooms, and olives",
-              },
-            ].map((pizza, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
-              >
-                <img
-                  src={pizza.image}
-                  alt={pizza.name}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
-                    {pizza.name}
-                  </h3>
-                  <p className="text-gray-600 mb-4">{pizza.description}</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-2xl font-bold text-orange-600">
-                      {pizza.price}
-                    </span>
-                    <button className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg transition-colors">
-                      Add to Cart
-                    </button>
+            {featuredPizzas.map((pizza) => {
+              const smallSize = pizza.sizes.find((s) => s.size === "small");
+              return (
+                <div
+                  key={pizza.id}
+                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+                >
+                  <img
+                    src={pizza.imageUrl || "/placeholder-pizza.jpg"}
+                    alt={pizza.name}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      {pizza.name}
+                    </h3>
+                    <p className="text-gray-600 mb-4">{pizza.description}</p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-2xl font-bold text-orange-600">
+                        {smallSize?.price}₴
+                      </span>
+                      <button className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        Add to Cart
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="text-center mt-12">
