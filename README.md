@@ -14,6 +14,9 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+for drizzle needs settings for db seed and connection, for manual setting env variable \
+run the command: export DATABASE_URL="postgresql://pizza_user:pizza_pass@localhost:5432/pizza_db"
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
