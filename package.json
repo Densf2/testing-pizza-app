@@ -6,7 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:generate": "drizzle-kit generate --schema ./db/schema.ts",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push --schema ./db/schema.ts",
+    "db:seed": "tsx ./db/seed.ts",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "drizzle-orm": "^0.44.6",
