@@ -5,10 +5,7 @@ export default defineConfig({
   //   out: "./drizzle",
   dialect: "postgresql",
   dbCredentials: {
-    url:
-      process.env.DATABASE_URL ||
-      "postgresql://pizza_user:pizza_pass@localhost:5432/pizza_db",
-    // url: "postgresql://pizza_user:pizza_pass@localhost:5432/pizza_db",
+    url: process.env.DATABASE_URL || " ",
   },
   verbose: true,
   strict: true,
