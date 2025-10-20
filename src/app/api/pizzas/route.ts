@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db, pizzas, pizzaSizes } from "@/lib/db";
+import { db, pizzas } from "@/lib/db";
 import { eq } from "drizzle-orm";
 
 export async function GET() {
