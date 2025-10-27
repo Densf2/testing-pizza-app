@@ -5,7 +5,7 @@ async function seed() {
   console.log("Seeding database");
 
   try {
-    console.log("Adding pizzas..."); // Seed Pizzas
+    console.log("Adding pizzas data"); // Seed Pizzas
     const [margherita, pepperoni, veggie, hawaiian, bbqChicken] = await db
       .insert(pizzas)
       .values([
@@ -57,7 +57,7 @@ async function seed() {
       ])
       .returning();
 
-    console.log("Adding pizza sizes..."); // Seed Pizza Sizes
+    console.log("Adding pizza sizes"); // Seed Pizza Sizes
     const allPizzas = [margherita, pepperoni, veggie, hawaiian, bbqChicken];
     for (const pizza of allPizzas) {
       await db.insert(pizzaSizes).values([
@@ -80,7 +80,7 @@ async function seed() {
       ]);
     }
 
-    console.log("Adding toppings..."); // Seed Toppings
+    console.log("Adding toppings"); // Seed Toppings
     await db.insert(toppings).values([
       { name: "Extra Cheese", price: "30", isActive: true },
       { name: "Mushrooms", price: "25", isActive: true },
@@ -94,7 +94,7 @@ async function seed() {
       { name: "Pineapple", price: "30", isActive: true },
     ]);
 
-    console.log("Adding test user..."); // Seed Test User
+    console.log("Adding test user"); // Seed Test User
     const [testUser] = await db
       .insert(users)
       .values({
@@ -105,7 +105,7 @@ async function seed() {
       })
       .returning();
 
-    console.log("Adding test address..."); // Seed Test Address
+    console.log("Adding test address"); // Seed Test Address
     await db.insert(addresses).values({
       userId: testUser.id,
       street: "Khreshchatyk Street, 1",
