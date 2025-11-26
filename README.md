@@ -23,3 +23,32 @@ For starting db instance run the command:
 Stop the db with command:
 `docker-compose down` \
 If DB url after starting the db instance different the configured in the files - update the env. variable value with your url.
+**Stop and remove all data (fresh start):**
+
+```bash
+docker-compose down -v
+```
+
+### Development Workflow
+
+When making changes to the database schema (`src/lib/db/schema.ts`):
+
+1. **Update the schema file** with your changes
+
+# When you change schema.ts:
+
+`npm run db:push` # Applies changes directly 2. **Push changes to database:**
+
+```bash
+npm run db:push
+```
+
+3. **Restart your dev server** to see changes
+
+### Viewing Database Data
+
+To browse and edit data with a visual interface:
+
+```bash
+npm run db:studio
+```
