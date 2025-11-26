@@ -8,6 +8,7 @@ import {
   timestamp,
   boolean,
   pgEnum,
+  unique,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
@@ -77,7 +78,7 @@ export const pizzaSizes = pgTable(
     price: decimal("price", { precision: 10, scale: 2 }).notNull(),
   },
   (table) => ({
-    uniquePizzaSize: table.unique(["pizzaId", "size"]),
+    uniquePizzaSize: unique().on(table.pizzaId, table.size),
   })
 );
 
@@ -151,12 +152,15 @@ export const pizzasRelations = relations(pizzas, ({ many }) => ({
   orderItems: many(orderItems),
 }));
 
-// Add this missing relation!
 export const pizzaSizesRelations = relations(pizzaSizes, ({ one }) => ({
   pizza: one(pizzas, {
     fields: [pizzaSizes.pizzaId],
     references: [pizzas.id],
   }),
+}));
+
+export const toppingsRelations = relations(toppings, ({ many }) => ({
+  orderItemToppings: many(orderItemToppings),
 }));
 
 export const ordersRelations = relations(orders, ({ one, many }) => ({
