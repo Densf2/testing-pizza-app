@@ -14,7 +14,7 @@ function PageTitle({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
@@ -36,6 +36,13 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
 
+    // Validation
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters");
+      setLoading(false);
+      return;
+    }
+
     try {
       // Fetch public key and encrypt credentials
       const publicKey = await fetchPublicKey();
@@ -45,7 +52,7 @@ export default function LoginPage() {
         publicKey
       );
 
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,12 +66,12 @@ export default function LoginPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.error || "Login failed");
+        setError(data.error || "Registration failed");
         setLoading(false);
         return;
       }
 
-      // Login successful - redirect to menu
+      // Registration successful - redirect to menu
       router.push("/menu");
     } catch {
       setError("An error occurred. Please try again.");
@@ -76,7 +83,7 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-md mx-auto">
-          <PageTitle>Login</PageTitle>
+          <PageTitle>Create Account</PageTitle>
 
           <div className="bg-white rounded-lg shadow-lg p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -119,32 +126,10 @@ export default function LoginPage() {
                   value={formData.password}
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  placeholder="Enter your password"
+                  placeholder="Create a password (min 6 characters)"
                   required
+                  minLength={6}
                 />
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
-                  />
-                  <label
-                    htmlFor="remember-me"
-                    className="ml-2 block text-sm text-gray-700"
-                  >
-                    Remember me
-                  </label>
-                </div>
-
-                <div className="text-sm">
-                  <a href="#" className="text-orange-600 hover:text-orange-500">
-                    Forgot password?
-                  </a>
-                </div>
               </div>
 
               <button
@@ -152,18 +137,18 @@ export default function LoginPage() {
                 disabled={loading}
                 className="w-full bg-orange-600 hover:bg-orange-700 disabled:bg-orange-400 text-white font-bold py-3 px-4 rounded-lg transition-colors"
               >
-                {loading ? "Signing in..." : "Sign In"}
+                {loading ? "Creating account..." : "Create Account"}
               </button>
             </form>
 
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
-                Don't have an account?{" "}
+                Already have an account?{" "}
                 <Link
-                  href="/register"
+                  href="/login"
                   className="text-orange-600 hover:text-orange-500 font-medium"
                 >
-                  Sign up here
+                  Sign in here
                 </Link>
               </p>
             </div>
