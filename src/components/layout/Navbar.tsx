@@ -1,11 +1,24 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Navbar() {
   const [sidebarShown, setSidebarShown] = useState(false);
+  const { user, loading, setUser } = useAuth();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+      setUser(null);
+      router.push("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   return (
     <>
@@ -24,26 +37,26 @@ export default function Navbar() {
             {/* Desktop Navigation */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <Link 
-                  href="/" 
+                <Link
+                  href="/"
                   className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Home
                 </Link>
-                <Link 
-                  href="/menu" 
+                <Link
+                  href="/menu"
                   className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Menu
                 </Link>
-                <Link 
-                  href="/about" 
+                <Link
+                  href="/about"
                   className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   About
                 </Link>
-                <Link 
-                  href="/cart" 
+                <Link
+                  href="/cart"
                   className="text-gray-700 hover:text-orange-600 px-3 py-2 rounded-md text-sm font-medium transition-colors relative"
                 >
                   Cart
@@ -52,12 +65,28 @@ export default function Navbar() {
                     0
                   </span>
                 </Link>
-                <Link 
-                  href="/login" 
-                  className="bg-orange-600 text-white hover:bg-orange-700 px-4 py-2 rounded-md text-sm font-medium transition-colors"
-                >
-                  Login
-                </Link>
+                {loading ? (
+                  <div className="px-4 py-2 text-sm text-gray-400">...</div>
+                ) : user ? (
+                  <div className="flex items-center space-x-3">
+                    <span className="text-gray-700 text-sm font-medium">
+                      {user.name || user.email}
+                    </span>
+                    <button
+                      onClick={handleLogout}
+                      className="bg-gray-200 text-gray-700 hover:bg-gray-300 px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="bg-orange-600 text-white hover:bg-orange-700 px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                  >
+                    Login
+                  </Link>
+                )}
               </div>
             </div>
 
@@ -68,9 +97,21 @@ export default function Navbar() {
                 className="text-gray-700 hover:text-orange-600 focus:outline-none focus:text-orange-600 p-2"
               >
                 <div className="w-6 h-6 flex flex-col justify-center items-center">
-                  <div className={`w-6 h-0.5 bg-current transition-all duration-300 ${sidebarShown ? 'rotate-45 translate-y-1.5' : ''}`} />
-                  <div className={`w-6 h-0.5 bg-current my-1 transition-all duration-300 ${sidebarShown ? 'opacity-0' : ''}`} />
-                  <div className={`w-6 h-0.5 bg-current transition-all duration-300 ${sidebarShown ? '-rotate-45 -translate-y-1.5' : ''}`} />
+                  <div
+                    className={`w-6 h-0.5 bg-current transition-all duration-300 ${
+                      sidebarShown ? "rotate-45 translate-y-1.5" : ""
+                    }`}
+                  />
+                  <div
+                    className={`w-6 h-0.5 bg-current my-1 transition-all duration-300 ${
+                      sidebarShown ? "opacity-0" : ""
+                    }`}
+                  />
+                  <div
+                    className={`w-6 h-0.5 bg-current transition-all duration-300 ${
+                      sidebarShown ? "-rotate-45 -translate-y-1.5" : ""
+                    }`}
+                  />
                 </div>
               </button>
             </div>
@@ -81,41 +122,58 @@ export default function Navbar() {
         {sidebarShown && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-              <Link 
-                href="/" 
+              <Link
+                href="/"
                 className="text-gray-700 hover:text-orange-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setSidebarShown(false)}
               >
                 Home
               </Link>
-              <Link 
-                href="/menu" 
+              <Link
+                href="/menu"
                 className="text-gray-700 hover:text-orange-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setSidebarShown(false)}
               >
                 Menu
               </Link>
-              <Link 
-                href="/about" 
+              <Link
+                href="/about"
                 className="text-gray-700 hover:text-orange-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setSidebarShown(false)}
               >
                 About
               </Link>
-              <Link 
-                href="/cart" 
+              <Link
+                href="/cart"
                 className="text-gray-700 hover:text-orange-600 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setSidebarShown(false)}
               >
                 Cart
               </Link>
-              <Link 
-                href="/login" 
-                className="text-gray-700 hover:text-orange-600 block px-3 py-2 rounded-md text-base font-medium"
-                onClick={() => setSidebarShown(false)}
-              >
-                Login
-              </Link>
+              {user ? (
+                <>
+                  <div className="px-3 py-2 text-gray-700 text-base font-medium">
+                    {user.name || user.email}
+                  </div>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setSidebarShown(false);
+                    }}
+                    className="text-gray-700 hover:text-orange-600 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <Link
+                  href="/login"
+                  className="text-gray-700 hover:text-orange-600 block px-3 py-2 rounded-md text-base font-medium"
+                  onClick={() => setSidebarShown(false)}
+                >
+                  Login
+                </Link>
+              )}
             </div>
           </div>
         )}
@@ -123,7 +181,7 @@ export default function Navbar() {
 
       {/* Mobile backdrop */}
       {sidebarShown && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
           onClick={() => setSidebarShown(false)}
         />

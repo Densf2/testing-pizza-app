@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { db, pizzas } from "@/lib/db";
+import { db, pizzas, pizzaSizes } from "@/lib/db";
 import { eq } from "drizzle-orm";
 
 async function getFeaturedPizzas() {
