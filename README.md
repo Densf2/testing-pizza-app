@@ -8,14 +8,15 @@ For starting db instance run the command:
 Stop the db with command:
 `docker-compose down` \
 If DB url after starting the db instance different the configured in the files - update the env. variable value with your url.
+
 **Stop and remove all data (fresh start):**
 
 ```bash
 docker-compose down -v
 ```
 
-For drizzle needs settings for db seed and connection, for manual setting env variable
-run the command: export DATABASE_URL="URL_GET_AFTER_COMMAND_DOCKER-COMPOSE"
+For data operating used - drizzle, and needs some settings for db seed and connection, for manual setting env variable
+run the command: export DATABASE_URL="URL_GET_AFTER_COMMAND_DOCKER-COMPOSE", url can get after start of docker image, for testing on my local machine used (postgres:16-alpine)
 
 Then, run the development server:
 
