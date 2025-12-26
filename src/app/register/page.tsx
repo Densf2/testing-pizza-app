@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { encryptCredentials, fetchPublicKey } from "@/lib/client-crypto";
+import { useAuth } from "@/contexts/AuthContext";
 
 function PageTitle({ children }: { children: React.ReactNode }) {
   return (
@@ -16,6 +17,7 @@ function PageTitle({ children }: { children: React.ReactNode }) {
 
 export default function RegisterPage() {
   const router = useRouter();
+  const { refreshUser } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -71,7 +73,8 @@ export default function RegisterPage() {
         return;
       }
 
-      // Registration successful - redirect to menu
+      // Registration successful - refresh user state and redirect to menu
+      await refreshUser();
       router.push("/menu");
     } catch {
       setError("An error occurred. Please try again.");
